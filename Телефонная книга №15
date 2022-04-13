@@ -1,0 +1,230 @@
+from array import *
+
+
+class Book:
+    def __init__(self, surname, birthday_day, number_phone):
+        self.surname = surname
+        self.birthday_day = birthday_day
+        self.number_phone = number_phone
+
+    def watch_book(self):
+        print(f"Фамилия - {self.surname}")
+        print(f"Год рождения - {self.birthday_day}")
+        print(f"Тел. - {self.number_phone}", end="\n\n")
+
+    def add_book(self):
+        self.surname = vvod_text()
+        self.birthday_day = vvod_age()
+        self.number_phone = vvod_nuber_phone()
+
+    def __del__(self):
+        print("Запись удалена.")
+
+
+mass = [Book("Иванова", "13.08.2003", "89902234"),
+        Book("Толяров", "21.11.2001", "89932135"),
+        Book("Автопов", "02.01.2004", "89023471")]
+
+
+def vvod_text():
+    while True:
+        num = input("Фамилия - ")
+        if num.isalpha():
+            return num
+            break
+        else:
+            print("В фамилии не может быть цифр.")
+
+
+def vvod_age():
+    s0 = "0"
+    list_month_30 = ('4', '6', '9', '11')
+    list_month_31 = ('1', '3', '5', '7', '8', '10', '12')
+    list_month_28 = ('2')
+    while True:
+        print("Год рождения - DD.MM.YYYY")
+        while True:
+            num_date = input("Дата-")
+            if num_date.isdigit():
+
+                break
+            else:
+                print("Введено не число.")
+        while True:
+            num_month = input("Месяц-")
+            if num_month.isdigit():
+                break
+            else:
+                print("Введено не число.")
+        while True:
+            num_year = input("Год-")
+            if num_year.isdigit():
+                if (1900 < int(num_year) < 2023):
+                    break
+                else:
+                    print("Недопустимый год.")
+            else:
+                print("Введено не число.")
+
+        if (((num_month in list_month_30) and (1 <= int(num_date) <= 30)) or (
+                (num_month in list_month_31) and (1 <= int(num_date) <= 31))
+                or ((num_month in list_month_28) and (1 <= int(num_date) <= 28))):
+            if (int(num_month) < 10): num_month = s0 + num_month
+            if (int(num_date) < 10): num_date = s0 + num_date
+            return (num_date + "." + num_month + "." + num_year)
+            break
+        else:
+            print("Данной даты не существует.")
+
+
+def vvod_nuber_phone():
+    while True:
+        numb = input("Тел. - ")
+        if numb.isdigit():
+            return (numb)
+            break
+
+        else:
+            print("Введёно неккоректно.")
+
+
+def vvod_menu():
+    my_list = (1, 2, 3, 4, 5)
+    while True:
+        num = input(f"Введите указанное число\n")
+        if num.isdigit():
+            num = int(num)
+            if num in my_list:
+                return num
+                break
+            else:
+                print("Введите Нужное число")
+        else:
+            print("Вы должны ввести указанное число, попробуйте снова.")
+
+
+def vvod_deli(n):
+    while True:
+        numb = input("Введите № записи, которую хотите удалить.\n")
+        if (numb.isdigit()) and (0 < int(numb) <= n):
+            return (int(numb))
+            break
+
+        else:
+            print("Введёно неккоректно.")
+
+
+def vvod_sort():
+    my_list = (1, 2, 3, 4)
+    while True:
+        num = input(f"Введите указанное число\n")
+        if num.isdigit():
+            num = int(num)
+            if num in my_list:
+                return num
+                break
+            else:
+                print("Введите Нужное число")
+        else:
+            print("Вы должны ввести указанное число, попробуйте снова.")
+
+
+def sort_by(n):
+    print("1-По фамилии.")
+    print("2-По дате рождения.")
+    print("3-по телефону.")
+    print("4-вернуться назад.")
+    num_sort = vvod_sort()
+    if (num_sort == 1):
+        sort_by_surname(n)
+    elif (num_sort == 2):
+        sort_by_birthday(n)
+    elif (num_sort == 3):
+        sort_by_phone(n)
+    else:
+        pass
+
+
+def sort_by_surname(n):
+    list = [i for i in range(n)]
+    for i in range(n):
+        list[i] = mass[i].surname
+
+    list = sorted(list)
+    for i in range(n):
+        for j in range(n):
+            if (mass[j].surname == list[i]):
+                mass[i].surname, mass[j].surname = mass[j].surname, mass[i].surname
+                mass[i].number_phone, mass[j].number_phone = mass[j].number_phone, mass[i].number_phone
+                mass[i].birthday_day, mass[j].birthday_day = mass[j].birthday_day, mass[i].birthday_day
+    print("Записная книжка отсортирована")
+
+
+def sort_by_phone(n):
+    list = [i for i in range(n)]
+    for i in range(n):
+        list[i] = mass[i].number_phone
+
+    list = sorted(list)
+    for i in range(n):
+        for j in range(n):
+            if (mass[j].number_phone == list[i]):
+                mass[i].surname, mass[j].surname = mass[j].surname, mass[i].surname
+                mass[i].number_phone, mass[j].number_phone = mass[j].number_phone, mass[i].number_phone
+                mass[i].birthday_day, mass[j].birthday_day = mass[j].birthday_day, mass[i].birthday_day
+    print("Записная книжка отсортирована")
+
+
+def sort_by_birthday(n):
+    list = [i for i in range(n)]
+    for i in range(n):
+        list[i] = mass[i].birthday_day[6:10]
+        list[i] += mass[i].birthday_day[3:5]
+        list[i] += mass[i].birthday_day[0:2]
+    list = sorted(list)
+    for i in range(n):
+        for j in range(n):
+            if (mass[j].birthday_day[6:10] == list[i][0:4]):
+                if (mass[j].birthday_day[3:5] == list[i][4:6]):
+                    if (mass[j].birthday_day[0:2] == list[i][6:9]):
+                        mass[i].surname, mass[j].surname = mass[j].surname, mass[i].surname
+                        mass[i].number_phone, mass[j].number_phone = mass[j].number_phone, mass[i].number_phone
+                        mass[i].birthday_day, mass[j].birthday_day = mass[j].birthday_day, mass[i].birthday_day
+    print("Записная книжка отсортирована")
+
+
+def menu():
+    flag = 1
+    n = 3
+    while (flag != 0):
+        print("Записная книжка открыта.Что вы хотите сделать?")
+        print("1-просмотреть книгу")
+        print("2-добавить запись")
+        print("3-удалить запись")
+        print("4-сортировать по...")
+        print("5-закончить работу")
+        vvodim = vvod_menu()
+        if (vvodim == 1):
+            for i in range(0, n):
+                print(f"№{i + 1}")
+                mass[i].watch_book()
+        elif (vvodim == 2):
+            n += 1
+            mass.append(Book("0", "0", "0"))
+            mass[n - 1].add_book()
+            print("Запись добавлена.")
+
+
+        elif (vvodim == 3):
+            deli = vvod_deli(n)
+            del mass[deli - 1]
+            n -= 1
+        elif (vvodim == 4):
+            sort_by(n)
+        else:
+            print("Приложение выключено.")
+            flag = 0
+
+
+if __name__ == '__main__':
+    menu()
