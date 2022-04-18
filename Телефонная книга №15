@@ -13,20 +13,20 @@ class Book:
         print(f"Тел. - {self.number_phone}", end="\n\n")
 
     def add_book(self):
-        self.surname = vvod_text()
-        self.birthday_day = vvod_age()
-        self.number_phone = vvod_nuber_phone()
+        self.surname = input_text()
+        self.birthday_day = input_age()
+        self.number_phone = input_nuber_phone()
 
     def __del__(self):
         print("Запись удалена.")
 
 
-mass = [Book("Иванова", "13.08.2003", "89902234"),
+books = [Book("Иванова", "13.08.2003", "89902234"),
         Book("Толяров", "21.11.2001", "89932135"),
         Book("Автопов", "02.01.2004", "89023471")]
 
 
-def vvod_text():
+def input_text():
     while True:
         num = input("Фамилия - ")
         if num.isalpha():
@@ -36,7 +36,7 @@ def vvod_text():
             print("В фамилии не может быть цифр.")
 
 
-def vvod_age():
+def input_age():
     s0 = "0"
     list_month_30 = ('4', '6', '9', '11')
     list_month_31 = ('1', '3', '5', '7', '8', '10', '12')
@@ -77,7 +77,7 @@ def vvod_age():
             print("Данной даты не существует.")
 
 
-def vvod_nuber_phone():
+def input_nuber_phone():
     while True:
         numb = input("Тел. - ")
         if numb.isdigit():
@@ -88,7 +88,7 @@ def vvod_nuber_phone():
             print("Введёно неккоректно.")
 
 
-def vvod_menu():
+def input_menu():
     my_list = (1, 2, 3, 4, 5)
     while True:
         num = input(f"Введите указанное число\n")
@@ -103,7 +103,7 @@ def vvod_menu():
             print("Вы должны ввести указанное число, попробуйте снова.")
 
 
-def vvod_deli(n):
+def input_deli(n):
     while True:
         numb = input("Введите № записи, которую хотите удалить.\n")
         if (numb.isdigit()) and (0 < int(numb) <= n):
@@ -114,7 +114,7 @@ def vvod_deli(n):
             print("Введёно неккоректно.")
 
 
-def vvod_sort():
+def input_sort():
     my_list = (1, 2, 3, 4)
     while True:
         num = input(f"Введите указанное число\n")
@@ -134,7 +134,7 @@ def sort_by(n):
     print("2-По дате рождения.")
     print("3-по телефону.")
     print("4-вернуться назад.")
-    num_sort = vvod_sort()
+    num_sort = input_sort()
     if (num_sort == 1):
         sort_by_surname(n)
     elif (num_sort == 2):
@@ -148,48 +148,48 @@ def sort_by(n):
 def sort_by_surname(n):
     list = [i for i in range(n)]
     for i in range(n):
-        list[i] = mass[i].surname
+        list[i] = books[i].surname
 
     list = sorted(list)
     for i in range(n):
         for j in range(n):
-            if (mass[j].surname == list[i]):
-                mass[i].surname, mass[j].surname = mass[j].surname, mass[i].surname
-                mass[i].number_phone, mass[j].number_phone = mass[j].number_phone, mass[i].number_phone
-                mass[i].birthday_day, mass[j].birthday_day = mass[j].birthday_day, mass[i].birthday_day
+            if (books[j].surname == list[i]):
+                books[i].surname, books[j].surname = books[j].surname, books[i].surname
+                books[i].number_phone, books[j].number_phone = books[j].number_phone, books[i].number_phone
+                books[i].birthday_day, books[j].birthday_day = books[j].birthday_day, books[i].birthday_day
     print("Записная книжка отсортирована")
 
 
 def sort_by_phone(n):
     list = [i for i in range(n)]
     for i in range(n):
-        list[i] = mass[i].number_phone
+        list[i] = books[i].number_phone
 
     list = sorted(list)
     for i in range(n):
         for j in range(n):
-            if (mass[j].number_phone == list[i]):
-                mass[i].surname, mass[j].surname = mass[j].surname, mass[i].surname
-                mass[i].number_phone, mass[j].number_phone = mass[j].number_phone, mass[i].number_phone
-                mass[i].birthday_day, mass[j].birthday_day = mass[j].birthday_day, mass[i].birthday_day
+            if (books[j].number_phone == list[i]):
+                books[i].surname, books[j].surname = books[j].surname, books[i].surname
+                books[i].number_phone, books[j].number_phone = books[j].number_phone, books[i].number_phone
+                books[i].birthday_day, books[j].birthday_day = books[j].birthday_day, books[i].birthday_day
     print("Записная книжка отсортирована")
 
 
 def sort_by_birthday(n):
     list = [i for i in range(n)]
     for i in range(n):
-        list[i] = mass[i].birthday_day[6:10]
-        list[i] += mass[i].birthday_day[3:5]
-        list[i] += mass[i].birthday_day[0:2]
+        list[i] = books[i].birthday_day[6:10]
+        list[i] += books[i].birthday_day[3:5]
+        list[i] += books[i].birthday_day[0:2]
     list = sorted(list)
     for i in range(n):
         for j in range(n):
-            if (mass[j].birthday_day[6:10] == list[i][0:4]):
-                if (mass[j].birthday_day[3:5] == list[i][4:6]):
-                    if (mass[j].birthday_day[0:2] == list[i][6:9]):
-                        mass[i].surname, mass[j].surname = mass[j].surname, mass[i].surname
-                        mass[i].number_phone, mass[j].number_phone = mass[j].number_phone, mass[i].number_phone
-                        mass[i].birthday_day, mass[j].birthday_day = mass[j].birthday_day, mass[i].birthday_day
+            if (books[j].birthday_day[6:10] == list[i][0:4]):
+                if (books[j].birthday_day[3:5] == list[i][4:6]):
+                    if (books[j].birthday_day[0:2] == list[i][6:9]):
+                        books[i].surname, books[j].surname = books[j].surname, books[i].surname
+                        books[i].number_phone, books[j].number_phone = books[j].number_phone, books[i].number_phone
+                        books[i].birthday_day, books[j].birthday_day = books[j].birthday_day, books[i].birthday_day
     print("Записная книжка отсортирована")
 
 
@@ -203,23 +203,23 @@ def menu():
         print("3-удалить запись")
         print("4-сортировать по...")
         print("5-закончить работу")
-        vvodim = vvod_menu()
-        if (vvodim == 1):
+        inputs = input_menu()
+        if (inputs == 1):
             for i in range(0, n):
                 print(f"№{i + 1}")
-                mass[i].watch_book()
-        elif (vvodim == 2):
+                books[i].watch_book()
+        elif (inputs == 2):
             n += 1
-            mass.append(Book("0", "0", "0"))
-            mass[n - 1].add_book()
+            books.append(Book("0", "0", "0"))
+            books[n - 1].add_book()
             print("Запись добавлена.")
 
 
-        elif (vvodim == 3):
-            deli = vvod_deli(n)
-            del mass[deli - 1]
+        elif (inputs == 3):
+            deli = input_deli(n)
+            del books[deli - 1]
             n -= 1
-        elif (vvodim == 4):
+        elif (inputs == 4):
             sort_by(n)
         else:
             print("Приложение выключено.")
