@@ -22,15 +22,15 @@ class Pentagon:
         while True:
             flag = 0
             self.A_coord = [0, 0]
-            self.B_coord = [vvod_dannyh("Введите коорд-ты B.\n"), vvod_dannyh("")]
-            self.C_coord = [vvod_dannyh("Введите коорд-ты C.\n"), vvod_dannyh("")]
-            self.D_coord = [vvod_dannyh("Введите коорд-ты D.\n"), vvod_dannyh("")]
-            self.E_coord = [vvod_dannyh("Введите коорд-ты E.\n"), vvod_dannyh("")]
-            flag += proverka_peresech(self.A_coord, self.B_coord, self.C_coord, self.D_coord)
-            flag += proverka_peresech(self.A_coord, self.B_coord, self.D_coord, self.E_coord)
-            flag += proverka_peresech(self.B_coord, self.C_coord, self.D_coord, self.E_coord)
-            flag += proverka_peresech(self.B_coord, self.C_coord, self.E_coord, self.A_coord)
-            flag += proverka_peresech(self.C_coord, self.D_coord, self.E_coord, self.A_coord)
+            self.B_coord = [input_dannyh("Введите коорд-ты B.\n"), input_dannyh("")]
+            self.C_coord = [input_dannyh("Введите коорд-ты C.\n"), input_dannyh("")]
+            self.D_coord = [input_dannyh("Введите коорд-ты D.\n"), input_dannyh("")]
+            self.E_coord = [input_dannyh("Введите коорд-ты E.\n"), input_dannyh("")]
+            flag += look_peresech(self.A_coord, self.B_coord, self.C_coord, self.D_coord)
+            flag += look_peresech(self.A_coord, self.B_coord, self.D_coord, self.E_coord)
+            flag += look_peresech(self.B_coord, self.C_coord, self.D_coord, self.E_coord)
+            flag += look_peresech(self.B_coord, self.C_coord, self.E_coord, self.A_coord)
+            flag += look_peresech(self.C_coord, self.D_coord, self.E_coord, self.A_coord)
             self.MIN_X = min(self.A_coord[0], self.B_coord[0], self.C_coord[0], self.D_coord[0], self.E_coord[0])
             self.MAX_X = max(self.A_coord[0], self.B_coord[0], self.C_coord[0], self.D_coord[0], self.E_coord[0])
             self.MIN_Y = min(self.A_coord[1], self.B_coord[1], self.C_coord[1], self.D_coord[1], self.E_coord[1])
@@ -39,8 +39,8 @@ class Pentagon:
             print("Введите по-новой коорд-ты.")
 
     def move_pent(self, Ax, Ay, Bx, By, Cx, Cy, Dx, Dy, Ex, Ey):
-        x = vvod_dannyh("На сколько вы хотите сместить фигуру по X?\n")
-        y = vvod_dannyh("На сколько вы хотите сместить фигуру по Y?\n")
+        x = input_dannyh("На сколько вы хотите сместить фигуру по X?\n")
+        y = input_dannyh("На сколько вы хотите сместить фигуру по Y?\n")
         self.A_coord = [Ax + x, Ay + y]
         self.B_coord = [Bx + x, By + y]
         self.C_coord = [Cx + x, Cy + y]
@@ -64,8 +64,8 @@ class Rectangle:
         self.MAX_Y = max(self.A_coord[1], self.B_coord[1], self.C_coord[1], self.D_coord[1])
 
     def make_koord(self):
-        hight = vvod_dannyh("Высота-")
-        wight = vvod_dannyh("Ширина-")
+        hight = input_dannyh("Высота-")
+        wight = input_dannyh("Ширина-")
         self.A_coord = [0, 0]
         self.B_coord = [0, hight]
         self.C_coord = [wight, hight]
@@ -76,8 +76,8 @@ class Rectangle:
         self.MAX_Y = max(self.A_coord[1], self.B_coord[1], self.C_coord[1], self.D_coord[1])
 
     def move_rect(self, Ax, Ay, Bx, By, Cx, Cy, Dx, Dy):
-        x = vvod_dannyh("На сколько вы хотите сместить фигуру по X?\n")
-        y = vvod_dannyh("На сколько вы хотите сместить фигуру по Y?\n")
+        x = input_dannyh("На сколько вы хотите сместить фигуру по X?\n")
+        y = input_dannyh("На сколько вы хотите сместить фигуру по Y?\n")
         self.A_coord = [Ax + x, Ay + y]
         self.B_coord = [Bx + x, By + y]
         self.C_coord = [Cx + x, Cy + y]
@@ -95,12 +95,12 @@ class Rectangle:
         print(f"D - {self.D_coord}\n")
 
 
-rectangle_mass = []
-pentagon_mass = []
-shape_mass = []
+rectangle_books = []
+pentagon_books = []
+shape_books = []
 
 
-def proverka_peresech(A, B, C, D):
+def look_peresech(A, B, C, D):
     A1 = A[1] - B[1]
     B1 = B[0] - A[0]
     C1 = A[0] * B[1] - B[0] * A[1]
@@ -134,7 +134,7 @@ def proverka_peresech(A, B, C, D):
         return 1
 
 
-def vvod_dannyh(text):
+def input_dannyh(text):
     while True:
         num = input(text)
         if num.isdigit():
@@ -144,7 +144,7 @@ def vvod_dannyh(text):
             print("Введено не число.")
 
 
-def vvod_necessery_shape(text, n, text1):
+def input_necessery_shape(text, n, text1):
     list = ("1", "2")
     while True:
         num = input(text)
@@ -167,7 +167,7 @@ def vvod_necessery_shape(text, n, text1):
             print("Введено не число.")
 
 
-def vvod_menu():
+def input_menu():
     my_list = (1, 2, 3, 4, 5, 6, 7)
     while True:
         num = input(f"Введите указанное число\n")
@@ -184,48 +184,48 @@ def vvod_menu():
 
 def make_rectangle(count_rect):
     print("Задайте высоту и ширину прямоугольника.")
-    rectangle_mass.append(Rectangle(0, 0, 0, 0, 0, 0, 0, 0))
-    rectangle_mass[count_rect - 1].make_koord()
-    shape_mass.append(rectangle_mass[count_rect - 1])
-    rectangle_mass[count_rect - 1].print_koord_rect(count_rect)
+    rectangle_books.append(Rectangle(0, 0, 0, 0, 0, 0, 0, 0))
+    rectangle_books[count_rect - 1].make_koord()
+    shape_books.append(rectangle_books[count_rect - 1])
+    rectangle_books[count_rect - 1].print_koord_rect(count_rect)
 
 
 def move_rect(count_rect):
-    ness_rect, flag = vvod_necessery_shape("1-Выбрать № прямоугольника?\n2-выйти.\n", count_rect, "Какой № изменить?")
+    ness_rect, flag = input_necessery_shape("1-Выбрать № прямоугольника?\n2-выйти.\n", count_rect, "Какой № изменить?")
     if flag == 1:
-        mass_Ax = rectangle_mass[ness_rect - 1].A_coord[0]
-        mass_Ay = rectangle_mass[ness_rect - 1].A_coord[1]
-        mass_Bx = rectangle_mass[ness_rect - 1].B_coord[0]
-        mass_By = rectangle_mass[ness_rect - 1].B_coord[1]
-        mass_Cx = rectangle_mass[ness_rect - 1].C_coord[0]
-        mass_Cy = rectangle_mass[ness_rect - 1].C_coord[1]
-        mass_Dx = rectangle_mass[ness_rect - 1].D_coord[0]
-        mass_Dy = rectangle_mass[ness_rect - 1].D_coord[1]
-        rectangle_mass[ness_rect - 1].move_rect(mass_Ax, mass_Ay, mass_Bx, mass_By, mass_Cx, mass_Cy, mass_Dx, mass_Dy)
+        mass_Ax = rectangle_books[ness_rect - 1].A_coord[0]
+        mass_Ay = rectangle_books[ness_rect - 1].A_coord[1]
+        mass_Bx = rectangle_books[ness_rect - 1].B_coord[0]
+        mass_By = rectangle_books[ness_rect - 1].B_coord[1]
+        mass_Cx = rectangle_books[ness_rect - 1].C_coord[0]
+        mass_Cy = rectangle_books[ness_rect - 1].C_coord[1]
+        mass_Dx = rectangle_books[ness_rect - 1].D_coord[0]
+        mass_Dy = rectangle_books[ness_rect - 1].D_coord[1]
+        rectangle_books[ness_rect - 1].move_rect(mass_Ax, mass_Ay, mass_Bx, mass_By, mass_Cx, mass_Cy, mass_Dx, mass_Dy)
 
 
 def move_pent(count_pent):
-    ness_pent, flag = vvod_necessery_shape("1-Выбрать № пятиугольника?\n2-выйти.\n", count_pent, "Какой № изменить?")
+    ness_pent, flag = input_necessery_shape("1-Выбрать № пятиугольника?\n2-выйти.\n", count_pent, "Какой № изменить?")
     if (flag == 1):
-        mass_Ax = pentagon_mass[ness_pent - 1].A_coord[0]
-        mass_Ay = pentagon_mass[ness_pent - 1].A_coord[1]
-        mass_Bx = pentagon_mass[ness_pent - 1].B_coord[0]
-        mass_By = pentagon_mass[ness_pent - 1].B_coord[1]
-        mass_Cx = pentagon_mass[ness_pent - 1].C_coord[0]
-        mass_Cy = pentagon_mass[ness_pent - 1].C_coord[1]
-        mass_Dx = pentagon_mass[ness_pent - 1].D_coord[0]
-        mass_Dy = pentagon_mass[ness_pent - 1].D_coord[1]
-        mass_Ex = pentagon_mass[ness_pent - 1].E_coord[0]
-        mass_Ey = pentagon_mass[ness_pent - 1].E_coord[1]
-        pentagon_mass[ness_pent - 1].move_pent(mass_Ax, mass_Ay, mass_Bx, mass_By, mass_Cx, mass_Cy, mass_Dx, mass_Dy,
-                                               mass_Ex, mass_Ey)
+        mass_Ax = pentagon_books[ness_pent - 1].A_coord[0]
+        mass_Ay = pentagon_books[ness_pent - 1].A_coord[1]
+        mass_Bx = pentagon_books[ness_pent - 1].B_coord[0]
+        mass_By = pentagon_books[ness_pent - 1].B_coord[1]
+        mass_Cx = pentagon_books[ness_pent - 1].C_coord[0]
+        mass_Cy = pentagon_books[ness_pent - 1].C_coord[1]
+        mass_Dx = pentagon_books[ness_pent - 1].D_coord[0]
+        mass_Dy = pentagon_books[ness_pent - 1].D_coord[1]
+        mass_Ex = pentagon_books[ness_pent - 1].E_coord[0]
+        mass_Ey = pentagon_books[ness_pent - 1].E_coord[1]
+        pentagon_books[ness_pent - 1].move_pent(mass_Ax, mass_Ay, mass_Bx, mass_By, mass_Cx, mass_Cy, mass_Dx, mass_Dy,
+                                                mass_Ex, mass_Ey)
 
 
 def make_pentagon(count_pent):
-    pentagon_mass.append(Pentagon(0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
-    pentagon_mass[count_pent - 1].make_pent()
-    shape_mass.append(pentagon_mass[count_pent - 1])
-    pentagon_mass[count_pent - 1].print_koord(count_pent)
+    pentagon_books.append(Pentagon(0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
+    pentagon_books[count_pent - 1].make_pent()
+    shape_books.append(pentagon_books[count_pent - 1])
+    pentagon_books[count_pent - 1].print_koord(count_pent)
 
 
 def watch_shapes(count_shapes, count_rect):
@@ -234,11 +234,11 @@ def watch_shapes(count_shapes, count_rect):
     count_pent_i = 0
     if (count_shapes > 0):
         for i in range(count_shapes):
-            if (count_rect > 0) and (rectangle_mass[count_rect_i] == shape_mass[i]):
-                rectangle_mass[count_rect_i].print_koord_rect(i + 1)
+            if (count_rect > 0) and (rectangle_books[count_rect_i] == shape_books[i]):
+                rectangle_books[count_rect_i].print_koord_rect(i + 1)
                 count_rect_i += 1
             else:
-                pentagon_mass[count_pent_i].print_koord(i + 1)
+                pentagon_books[count_pent_i].print_koord(i + 1)
                 count_pent_i += 1
 
     else:
@@ -246,10 +246,10 @@ def watch_shapes(count_shapes, count_rect):
 
 
 def rectangle_in_rectangle(number_shape1, number_shape2, j1, j2):
-    if (rectangle_mass[j2].MIN_X > rectangle_mass[j1].MIN_X) and (
-            rectangle_mass[j2].MAX_X < rectangle_mass[j1].MAX_X) and (
-            rectangle_mass[j2].MIN_Y > rectangle_mass[j1].MIN_Y) and (
-            rectangle_mass[j2].MAX_Y < rectangle_mass[j1].MAX_Y):
+    if (rectangle_books[j2].MIN_X > rectangle_books[j1].MIN_X) and (
+            rectangle_books[j2].MAX_X < rectangle_books[j1].MAX_X) and (
+            rectangle_books[j2].MIN_Y > rectangle_books[j1].MIN_Y) and (
+            rectangle_books[j2].MAX_Y < rectangle_books[j1].MAX_Y):
         print(f"Фигура под № {number_shape2} включается в фигуру под № {number_shape1} ")
     else:
         print(f"Фигура под № {number_shape2} не включается в фигуру под № {number_shape1} ")
@@ -257,54 +257,54 @@ def rectangle_in_rectangle(number_shape1, number_shape2, j1, j2):
 
 def pentagon_in_rectangle(number_shape1, number_shape2, j1, j2):
     flag = 0
-    if (pentagon_mass[j2].MIN_X > rectangle_mass[j1].MIN_X) and (
-            pentagon_mass[j2].MAX_X < rectangle_mass[j1].MAX_X) and (
-            pentagon_mass[j2].MIN_Y > rectangle_mass[j1].MIN_Y) and (
-            pentagon_mass[j2].MAX_Y < rectangle_mass[j1].MAX_Y):
-        flag += proverka_peresech(pentagon_mass[j2].A_coord, pentagon_mass[j2].B_coord, rectangle_mass[j1].A_coord,
-                                  rectangle_mass[j1].B_coord)
-        flag += proverka_peresech(pentagon_mass[j2].A_coord, pentagon_mass[j2].B_coord, rectangle_mass[j1].B_coord,
-                                  rectangle_mass[j1].C_coord)
-        flag += proverka_peresech(pentagon_mass[j2].A_coord, pentagon_mass[j2].B_coord, rectangle_mass[j1].C_coord,
-                                  rectangle_mass[j1].D_coord)
-        flag += proverka_peresech(pentagon_mass[j2].A_coord, pentagon_mass[j2].B_coord, rectangle_mass[j1].D_coord,
-                                  rectangle_mass[j1].A_coord)
+    if (pentagon_books[j2].MIN_X > rectangle_books[j1].MIN_X) and (
+            pentagon_books[j2].MAX_X < rectangle_books[j1].MAX_X) and (
+            pentagon_books[j2].MIN_Y > rectangle_books[j1].MIN_Y) and (
+            pentagon_books[j2].MAX_Y < rectangle_books[j1].MAX_Y):
+        flag += look_peresech(pentagon_books[j2].A_coord, pentagon_books[j2].B_coord, rectangle_books[j1].A_coord,
+                              rectangle_books[j1].B_coord)
+        flag += look_peresech(pentagon_books[j2].A_coord, pentagon_books[j2].B_coord, rectangle_books[j1].B_coord,
+                              rectangle_books[j1].C_coord)
+        flag += look_peresech(pentagon_books[j2].A_coord, pentagon_books[j2].B_coord, rectangle_books[j1].C_coord,
+                              rectangle_books[j1].D_coord)
+        flag += look_peresech(pentagon_books[j2].A_coord, pentagon_books[j2].B_coord, rectangle_books[j1].D_coord,
+                              rectangle_books[j1].A_coord)
 
-        flag += proverka_peresech(pentagon_mass[j2].B_coord, pentagon_mass[j2].C_coord, rectangle_mass[j1].A_coord,
-                                  rectangle_mass[j1].B_coord)
-        flag += proverka_peresech(pentagon_mass[j2].B_coord, pentagon_mass[j2].C_coord, rectangle_mass[j1].B_coord,
-                                  rectangle_mass[j1].C_coord)
-        flag += proverka_peresech(pentagon_mass[j2].B_coord, pentagon_mass[j2].C_coord, rectangle_mass[j1].C_coord,
-                                  rectangle_mass[j1].D_coord)
-        flag += proverka_peresech(pentagon_mass[j2].B_coord, pentagon_mass[j2].C_coord, rectangle_mass[j1].D_coord,
-                                  rectangle_mass[j1].A_coord)
+        flag += look_peresech(pentagon_books[j2].B_coord, pentagon_books[j2].C_coord, rectangle_books[j1].A_coord,
+                              rectangle_books[j1].B_coord)
+        flag += look_peresech(pentagon_books[j2].B_coord, pentagon_books[j2].C_coord, rectangle_books[j1].B_coord,
+                              rectangle_books[j1].C_coord)
+        flag += look_peresech(pentagon_books[j2].B_coord, pentagon_books[j2].C_coord, rectangle_books[j1].C_coord,
+                              rectangle_books[j1].D_coord)
+        flag += look_peresech(pentagon_books[j2].B_coord, pentagon_books[j2].C_coord, rectangle_books[j1].D_coord,
+                              rectangle_books[j1].A_coord)
 
-        flag += proverka_peresech(pentagon_mass[j2].C_coord, pentagon_mass[j2].D_coord, rectangle_mass[j1].A_coord,
-                                  rectangle_mass[j1].B_coord)
-        flag += proverka_peresech(pentagon_mass[j2].C_coord, pentagon_mass[j2].D_coord, rectangle_mass[j1].B_coord,
-                                  rectangle_mass[j1].C_coord)
-        flag += proverka_peresech(pentagon_mass[j2].C_coord, pentagon_mass[j2].D_coord, rectangle_mass[j1].C_coord,
-                                  rectangle_mass[j1].D_coord)
-        flag += proverka_peresech(pentagon_mass[j2].C_coord, pentagon_mass[j2].D_coord, rectangle_mass[j1].D_coord,
-                                  rectangle_mass[j1].A_coord)
+        flag += look_peresech(pentagon_books[j2].C_coord, pentagon_books[j2].D_coord, rectangle_books[j1].A_coord,
+                              rectangle_books[j1].B_coord)
+        flag += look_peresech(pentagon_books[j2].C_coord, pentagon_books[j2].D_coord, rectangle_books[j1].B_coord,
+                              rectangle_books[j1].C_coord)
+        flag += look_peresech(pentagon_books[j2].C_coord, pentagon_books[j2].D_coord, rectangle_books[j1].C_coord,
+                              rectangle_books[j1].D_coord)
+        flag += look_peresech(pentagon_books[j2].C_coord, pentagon_books[j2].D_coord, rectangle_books[j1].D_coord,
+                              rectangle_books[j1].A_coord)
 
-        flag += proverka_peresech(pentagon_mass[j2].D_coord, pentagon_mass[j2].E_coord, rectangle_mass[j1].A_coord,
-                                  rectangle_mass[j1].B_coord)
-        flag += proverka_peresech(pentagon_mass[j2].D_coord, pentagon_mass[j2].E_coord, rectangle_mass[j1].B_coord,
-                                  rectangle_mass[j1].C_coord)
-        flag += proverka_peresech(pentagon_mass[j2].D_coord, pentagon_mass[j2].E_coord, rectangle_mass[j1].C_coord,
-                                  rectangle_mass[j1].D_coord)
-        flag += proverka_peresech(pentagon_mass[j2].D_coord, pentagon_mass[j2].E_coord, rectangle_mass[j1].D_coord,
-                                  rectangle_mass[j1].A_coord)
+        flag += look_peresech(pentagon_books[j2].D_coord, pentagon_books[j2].E_coord, rectangle_books[j1].A_coord,
+                              rectangle_books[j1].B_coord)
+        flag += look_peresech(pentagon_books[j2].D_coord, pentagon_books[j2].E_coord, rectangle_books[j1].B_coord,
+                              rectangle_books[j1].C_coord)
+        flag += look_peresech(pentagon_books[j2].D_coord, pentagon_books[j2].E_coord, rectangle_books[j1].C_coord,
+                              rectangle_books[j1].D_coord)
+        flag += look_peresech(pentagon_books[j2].D_coord, pentagon_books[j2].E_coord, rectangle_books[j1].D_coord,
+                              rectangle_books[j1].A_coord)
 
-        flag += proverka_peresech(pentagon_mass[j2].E_coord, pentagon_mass[j2].A_coord, rectangle_mass[j1].A_coord,
-                                  rectangle_mass[j1].B_coord)
-        flag += proverka_peresech(pentagon_mass[j2].E_coord, pentagon_mass[j2].A_coord, rectangle_mass[j1].B_coord,
-                                  rectangle_mass[j1].C_coord)
-        flag += proverka_peresech(pentagon_mass[j2].E_coord, pentagon_mass[j2].A_coord, rectangle_mass[j1].C_coord,
-                                  rectangle_mass[j1].D_coord)
-        flag += proverka_peresech(pentagon_mass[j2].E_coord, pentagon_mass[j2].A_coord, rectangle_mass[j1].D_coord,
-                                  rectangle_mass[j1].A_coord)
+        flag += look_peresech(pentagon_books[j2].E_coord, pentagon_books[j2].A_coord, rectangle_books[j1].A_coord,
+                              rectangle_books[j1].B_coord)
+        flag += look_peresech(pentagon_books[j2].E_coord, pentagon_books[j2].A_coord, rectangle_books[j1].B_coord,
+                              rectangle_books[j1].C_coord)
+        flag += look_peresech(pentagon_books[j2].E_coord, pentagon_books[j2].A_coord, rectangle_books[j1].C_coord,
+                              rectangle_books[j1].D_coord)
+        flag += look_peresech(pentagon_books[j2].E_coord, pentagon_books[j2].A_coord, rectangle_books[j1].D_coord,
+                              rectangle_books[j1].A_coord)
         if (flag == 20):
             print(f"Фигура под № {number_shape2} включается в фигуру под № {number_shape1} ")
         else:
@@ -315,54 +315,54 @@ def pentagon_in_rectangle(number_shape1, number_shape2, j1, j2):
 
 def rectangle_in_pentagon(number_shape1, number_shape2, j1, j2):
     flag = 0
-    if (pentagon_mass[j1].MIN_X < rectangle_mass[j2].MIN_X) and (
-            pentagon_mass[j1].MAX_X > rectangle_mass[j2].MAX_X) and (
-            pentagon_mass[j1].MIN_Y < rectangle_mass[j2].MIN_Y) and (
-            pentagon_mass[j1].MAX_Y > rectangle_mass[j2].MAX_Y):
-        flag += proverka_peresech(pentagon_mass[j1].A_coord, pentagon_mass[j1].B_coord, rectangle_mass[j2].A_coord,
-                                  rectangle_mass[j2].B_coord)
-        flag += proverka_peresech(pentagon_mass[j1].A_coord, pentagon_mass[j1].B_coord, rectangle_mass[j2].B_coord,
-                                  rectangle_mass[j2].C_coord)
-        flag += proverka_peresech(pentagon_mass[j1].A_coord, pentagon_mass[j1].B_coord, rectangle_mass[j2].C_coord,
-                                  rectangle_mass[j2].D_coord)
-        flag += proverka_peresech(pentagon_mass[j1].A_coord, pentagon_mass[j1].B_coord, rectangle_mass[j2].D_coord,
-                                  rectangle_mass[j2].A_coord)
+    if (pentagon_books[j1].MIN_X < rectangle_books[j2].MIN_X) and (
+            pentagon_books[j1].MAX_X > rectangle_books[j2].MAX_X) and (
+            pentagon_books[j1].MIN_Y < rectangle_books[j2].MIN_Y) and (
+            pentagon_books[j1].MAX_Y > rectangle_books[j2].MAX_Y):
+        flag += look_peresech(pentagon_books[j1].A_coord, pentagon_books[j1].B_coord, rectangle_books[j2].A_coord,
+                              rectangle_books[j2].B_coord)
+        flag += look_peresech(pentagon_books[j1].A_coord, pentagon_books[j1].B_coord, rectangle_books[j2].B_coord,
+                              rectangle_books[j2].C_coord)
+        flag += look_peresech(pentagon_books[j1].A_coord, pentagon_books[j1].B_coord, rectangle_books[j2].C_coord,
+                              rectangle_books[j2].D_coord)
+        flag += look_peresech(pentagon_books[j1].A_coord, pentagon_books[j1].B_coord, rectangle_books[j2].D_coord,
+                              rectangle_books[j2].A_coord)
 
-        flag += proverka_peresech(pentagon_mass[j1].B_coord, pentagon_mass[j1].C_coord, rectangle_mass[j2].A_coord,
-                                  rectangle_mass[j2].B_coord)
-        flag += proverka_peresech(pentagon_mass[j1].B_coord, pentagon_mass[j1].C_coord, rectangle_mass[j2].B_coord,
-                                  rectangle_mass[j2].C_coord)
-        flag += proverka_peresech(pentagon_mass[j1].B_coord, pentagon_mass[j1].C_coord, rectangle_mass[j2].C_coord,
-                                  rectangle_mass[j2].D_coord)
-        flag += proverka_peresech(pentagon_mass[j1].B_coord, pentagon_mass[j1].C_coord, rectangle_mass[j2].D_coord,
-                                  rectangle_mass[j2].A_coord)
+        flag += look_peresech(pentagon_books[j1].B_coord, pentagon_books[j1].C_coord, rectangle_books[j2].A_coord,
+                              rectangle_books[j2].B_coord)
+        flag += look_peresech(pentagon_books[j1].B_coord, pentagon_books[j1].C_coord, rectangle_books[j2].B_coord,
+                              rectangle_books[j2].C_coord)
+        flag += look_peresech(pentagon_books[j1].B_coord, pentagon_books[j1].C_coord, rectangle_books[j2].C_coord,
+                              rectangle_books[j2].D_coord)
+        flag += look_peresech(pentagon_books[j1].B_coord, pentagon_books[j1].C_coord, rectangle_books[j2].D_coord,
+                              rectangle_books[j2].A_coord)
 
-        flag += proverka_peresech(pentagon_mass[j1].C_coord, pentagon_mass[j1].D_coord, rectangle_mass[j2].A_coord,
-                                  rectangle_mass[j2].B_coord)
-        flag += proverka_peresech(pentagon_mass[j1].C_coord, pentagon_mass[j1].D_coord, rectangle_mass[j2].B_coord,
-                                  rectangle_mass[j2].C_coord)
-        flag += proverka_peresech(pentagon_mass[j1].C_coord, pentagon_mass[j1].D_coord, rectangle_mass[j2].C_coord,
-                                  rectangle_mass[j2].D_coord)
-        flag += proverka_peresech(pentagon_mass[j1].C_coord, pentagon_mass[j1].D_coord, rectangle_mass[j2].D_coord,
-                                  rectangle_mass[j2].A_coord)
+        flag += look_peresech(pentagon_books[j1].C_coord, pentagon_books[j1].D_coord, rectangle_books[j2].A_coord,
+                              rectangle_books[j2].B_coord)
+        flag += look_peresech(pentagon_books[j1].C_coord, pentagon_books[j1].D_coord, rectangle_books[j2].B_coord,
+                              rectangle_books[j2].C_coord)
+        flag += look_peresech(pentagon_books[j1].C_coord, pentagon_books[j1].D_coord, rectangle_books[j2].C_coord,
+                              rectangle_books[j2].D_coord)
+        flag += look_peresech(pentagon_books[j1].C_coord, pentagon_books[j1].D_coord, rectangle_books[j2].D_coord,
+                              rectangle_books[j2].A_coord)
 
-        flag += proverka_peresech(pentagon_mass[j1].D_coord, pentagon_mass[j1].E_coord, rectangle_mass[j2].A_coord,
-                                  rectangle_mass[j2].B_coord)
-        flag += proverka_peresech(pentagon_mass[j1].D_coord, pentagon_mass[j1].E_coord, rectangle_mass[j2].B_coord,
-                                  rectangle_mass[j2].C_coord)
-        flag += proverka_peresech(pentagon_mass[j1].D_coord, pentagon_mass[j1].E_coord, rectangle_mass[j2].C_coord,
-                                  rectangle_mass[j2].D_coord)
-        flag += proverka_peresech(pentagon_mass[j1].D_coord, pentagon_mass[j1].E_coord, rectangle_mass[j2].D_coord,
-                                  rectangle_mass[j2].A_coord)
+        flag += look_peresech(pentagon_books[j1].D_coord, pentagon_books[j1].E_coord, rectangle_books[j2].A_coord,
+                              rectangle_books[j2].B_coord)
+        flag += look_peresech(pentagon_books[j1].D_coord, pentagon_books[j1].E_coord, rectangle_books[j2].B_coord,
+                              rectangle_books[j2].C_coord)
+        flag += look_peresech(pentagon_books[j1].D_coord, pentagon_books[j1].E_coord, rectangle_books[j2].C_coord,
+                              rectangle_books[j2].D_coord)
+        flag += look_peresech(pentagon_books[j1].D_coord, pentagon_books[j1].E_coord, rectangle_books[j2].D_coord,
+                              rectangle_books[j2].A_coord)
 
-        flag += proverka_peresech(pentagon_mass[j1].E_coord, pentagon_mass[j1].A_coord, rectangle_mass[j2].A_coord,
-                                  rectangle_mass[j2].B_coord)
-        flag += proverka_peresech(pentagon_mass[j1].E_coord, pentagon_mass[j1].A_coord, rectangle_mass[j2].B_coord,
-                                  rectangle_mass[j2].C_coord)
-        flag += proverka_peresech(pentagon_mass[j1].E_coord, pentagon_mass[j1].A_coord, rectangle_mass[j2].C_coord,
-                                  rectangle_mass[j2].D_coord)
-        flag += proverka_peresech(pentagon_mass[j1].E_coord, pentagon_mass[j1].A_coord, rectangle_mass[j2].D_coord,
-                                  rectangle_mass[j2].A_coord)
+        flag += look_peresech(pentagon_books[j1].E_coord, pentagon_books[j1].A_coord, rectangle_books[j2].A_coord,
+                              rectangle_books[j2].B_coord)
+        flag += look_peresech(pentagon_books[j1].E_coord, pentagon_books[j1].A_coord, rectangle_books[j2].B_coord,
+                              rectangle_books[j2].C_coord)
+        flag += look_peresech(pentagon_books[j1].E_coord, pentagon_books[j1].A_coord, rectangle_books[j2].C_coord,
+                              rectangle_books[j2].D_coord)
+        flag += look_peresech(pentagon_books[j1].E_coord, pentagon_books[j1].A_coord, rectangle_books[j2].D_coord,
+                              rectangle_books[j2].A_coord)
         if (flag == 20):
             print(f"Фигура под № {number_shape2} включается в фигуру под № {number_shape1} ")
         else:
@@ -373,64 +373,64 @@ def rectangle_in_pentagon(number_shape1, number_shape2, j1, j2):
 
 def pentagon_in_pentagon(number_shape1, number_shape2, j1, j2):
     flag = 0
-    if (pentagon_mass[j1].MIN_X < pentagon_mass[j2].MIN_X) and (
-            pentagon_mass[j1].MAX_X > pentagon_mass[j2].MAX_X) and (
-            pentagon_mass[j1].MIN_Y < pentagon_mass[j2].MIN_Y) and (
-            pentagon_mass[j1].MAX_Y > pentagon_mass[j2].MAX_Y):
-        flag += proverka_peresech(pentagon_mass[j1].A_coord, pentagon_mass[j1].B_coord, pentagon_mass[j2].A_coord,
-                                  pentagon_mass[j2].B_coord)
-        flag += proverka_peresech(pentagon_mass[j1].A_coord, pentagon_mass[j1].B_coord, pentagon_mass[j2].B_coord,
-                                  pentagon_mass[j2].C_coord)
-        flag += proverka_peresech(pentagon_mass[j1].A_coord, pentagon_mass[j1].B_coord, pentagon_mass[j2].C_coord,
-                                  pentagon_mass[j2].D_coord)
-        flag += proverka_peresech(pentagon_mass[j1].A_coord, pentagon_mass[j1].B_coord, pentagon_mass[j2].D_coord,
-                                  pentagon_mass[j2].E_coord)
-        flag += proverka_peresech(pentagon_mass[j1].A_coord, pentagon_mass[j1].B_coord, pentagon_mass[j2].E_coord,
-                                  pentagon_mass[j2].A_coord)
+    if (pentagon_books[j1].MIN_X < pentagon_books[j2].MIN_X) and (
+            pentagon_books[j1].MAX_X > pentagon_books[j2].MAX_X) and (
+            pentagon_books[j1].MIN_Y < pentagon_books[j2].MIN_Y) and (
+            pentagon_books[j1].MAX_Y > pentagon_books[j2].MAX_Y):
+        flag += look_peresech(pentagon_books[j1].A_coord, pentagon_books[j1].B_coord, pentagon_books[j2].A_coord,
+                              pentagon_books[j2].B_coord)
+        flag += look_peresech(pentagon_books[j1].A_coord, pentagon_books[j1].B_coord, pentagon_books[j2].B_coord,
+                              pentagon_books[j2].C_coord)
+        flag += look_peresech(pentagon_books[j1].A_coord, pentagon_books[j1].B_coord, pentagon_books[j2].C_coord,
+                              pentagon_books[j2].D_coord)
+        flag += look_peresech(pentagon_books[j1].A_coord, pentagon_books[j1].B_coord, pentagon_books[j2].D_coord,
+                              pentagon_books[j2].E_coord)
+        flag += look_peresech(pentagon_books[j1].A_coord, pentagon_books[j1].B_coord, pentagon_books[j2].E_coord,
+                              pentagon_books[j2].A_coord)
 
-        flag += proverka_peresech(pentagon_mass[j1].B_coord, pentagon_mass[j1].C_coord, pentagon_mass[j2].A_coord,
-                                  pentagon_mass[j2].B_coord)
-        flag += proverka_peresech(pentagon_mass[j1].B_coord, pentagon_mass[j1].C_coord, pentagon_mass[j2].B_coord,
-                                  pentagon_mass[j2].C_coord)
-        flag += proverka_peresech(pentagon_mass[j1].B_coord, pentagon_mass[j1].C_coord, pentagon_mass[j2].C_coord,
-                                  pentagon_mass[j2].D_coord)
-        flag += proverka_peresech(pentagon_mass[j1].B_coord, pentagon_mass[j1].C_coord, pentagon_mass[j2].D_coord,
-                                  pentagon_mass[j2].E_coord)
-        flag += proverka_peresech(pentagon_mass[j1].B_coord, pentagon_mass[j1].C_coord, pentagon_mass[j2].E_coord,
-                                  pentagon_mass[j2].A_coord)
+        flag += look_peresech(pentagon_books[j1].B_coord, pentagon_books[j1].C_coord, pentagon_books[j2].A_coord,
+                              pentagon_books[j2].B_coord)
+        flag += look_peresech(pentagon_books[j1].B_coord, pentagon_books[j1].C_coord, pentagon_books[j2].B_coord,
+                              pentagon_books[j2].C_coord)
+        flag += look_peresech(pentagon_books[j1].B_coord, pentagon_books[j1].C_coord, pentagon_books[j2].C_coord,
+                              pentagon_books[j2].D_coord)
+        flag += look_peresech(pentagon_books[j1].B_coord, pentagon_books[j1].C_coord, pentagon_books[j2].D_coord,
+                              pentagon_books[j2].E_coord)
+        flag += look_peresech(pentagon_books[j1].B_coord, pentagon_books[j1].C_coord, pentagon_books[j2].E_coord,
+                              pentagon_books[j2].A_coord)
 
-        flag += proverka_peresech(pentagon_mass[j1].C_coord, pentagon_mass[j1].D_coord, pentagon_mass[j2].A_coord,
-                                  pentagon_mass[j2].B_coord)
-        flag += proverka_peresech(pentagon_mass[j1].C_coord, pentagon_mass[j1].D_coord, pentagon_mass[j2].B_coord,
-                                  pentagon_mass[j2].C_coord)
-        flag += proverka_peresech(pentagon_mass[j1].C_coord, pentagon_mass[j1].D_coord, pentagon_mass[j2].C_coord,
-                                  pentagon_mass[j2].D_coord)
-        flag += proverka_peresech(pentagon_mass[j1].C_coord, pentagon_mass[j1].D_coord, pentagon_mass[j2].D_coord,
-                                  pentagon_mass[j2].E_coord)
-        flag += proverka_peresech(pentagon_mass[j1].C_coord, pentagon_mass[j1].D_coord, pentagon_mass[j2].E_coord,
-                                  pentagon_mass[j2].A_coord)
+        flag += look_peresech(pentagon_books[j1].C_coord, pentagon_books[j1].D_coord, pentagon_books[j2].A_coord,
+                              pentagon_books[j2].B_coord)
+        flag += look_peresech(pentagon_books[j1].C_coord, pentagon_books[j1].D_coord, pentagon_books[j2].B_coord,
+                              pentagon_books[j2].C_coord)
+        flag += look_peresech(pentagon_books[j1].C_coord, pentagon_books[j1].D_coord, pentagon_books[j2].C_coord,
+                              pentagon_books[j2].D_coord)
+        flag += look_peresech(pentagon_books[j1].C_coord, pentagon_books[j1].D_coord, pentagon_books[j2].D_coord,
+                              pentagon_books[j2].E_coord)
+        flag += look_peresech(pentagon_books[j1].C_coord, pentagon_books[j1].D_coord, pentagon_books[j2].E_coord,
+                              pentagon_books[j2].A_coord)
 
-        flag += proverka_peresech(pentagon_mass[j1].D_coord, pentagon_mass[j1].E_coord, pentagon_mass[j2].A_coord,
-                                  pentagon_mass[j2].B_coord)
-        flag += proverka_peresech(pentagon_mass[j1].D_coord, pentagon_mass[j1].E_coord, pentagon_mass[j2].B_coord,
-                                  pentagon_mass[j2].C_coord)
-        flag += proverka_peresech(pentagon_mass[j1].D_coord, pentagon_mass[j1].E_coord, pentagon_mass[j2].C_coord,
-                                  pentagon_mass[j2].D_coord)
-        flag += proverka_peresech(pentagon_mass[j1].D_coord, pentagon_mass[j1].E_coord, pentagon_mass[j2].D_coord,
-                                  pentagon_mass[j2].E_coord)
-        flag += proverka_peresech(pentagon_mass[j1].D_coord, pentagon_mass[j1].E_coord, pentagon_mass[j2].E_coord,
-                                  pentagon_mass[j2].A_coord)
+        flag += look_peresech(pentagon_books[j1].D_coord, pentagon_books[j1].E_coord, pentagon_books[j2].A_coord,
+                              pentagon_books[j2].B_coord)
+        flag += look_peresech(pentagon_books[j1].D_coord, pentagon_books[j1].E_coord, pentagon_books[j2].B_coord,
+                              pentagon_books[j2].C_coord)
+        flag += look_peresech(pentagon_books[j1].D_coord, pentagon_books[j1].E_coord, pentagon_books[j2].C_coord,
+                              pentagon_books[j2].D_coord)
+        flag += look_peresech(pentagon_books[j1].D_coord, pentagon_books[j1].E_coord, pentagon_books[j2].D_coord,
+                              pentagon_books[j2].E_coord)
+        flag += look_peresech(pentagon_books[j1].D_coord, pentagon_books[j1].E_coord, pentagon_books[j2].E_coord,
+                              pentagon_books[j2].A_coord)
 
-        flag += proverka_peresech(pentagon_mass[j1].E_coord, pentagon_mass[j1].A_coord, pentagon_mass[j2].A_coord,
-                                  pentagon_mass[j2].B_coord)
-        flag += proverka_peresech(pentagon_mass[j1].E_coord, pentagon_mass[j1].A_coord, pentagon_mass[j2].B_coord,
-                                  pentagon_mass[j2].C_coord)
-        flag += proverka_peresech(pentagon_mass[j1].E_coord, pentagon_mass[j1].A_coord, pentagon_mass[j2].C_coord,
-                                  pentagon_mass[j2].D_coord)
-        flag += proverka_peresech(pentagon_mass[j1].E_coord, pentagon_mass[j1].A_coord, pentagon_mass[j2].D_coord,
-                                  pentagon_mass[j2].E_coord)
-        flag += proverka_peresech(pentagon_mass[j1].E_coord, pentagon_mass[j1].A_coord, pentagon_mass[j2].E_coord,
-                                  pentagon_mass[j2].A_coord)
+        flag += look_peresech(pentagon_books[j1].E_coord, pentagon_books[j1].A_coord, pentagon_books[j2].A_coord,
+                              pentagon_books[j2].B_coord)
+        flag += look_peresech(pentagon_books[j1].E_coord, pentagon_books[j1].A_coord, pentagon_books[j2].B_coord,
+                              pentagon_books[j2].C_coord)
+        flag += look_peresech(pentagon_books[j1].E_coord, pentagon_books[j1].A_coord, pentagon_books[j2].C_coord,
+                              pentagon_books[j2].D_coord)
+        flag += look_peresech(pentagon_books[j1].E_coord, pentagon_books[j1].A_coord, pentagon_books[j2].D_coord,
+                              pentagon_books[j2].E_coord)
+        flag += look_peresech(pentagon_books[j1].E_coord, pentagon_books[j1].A_coord, pentagon_books[j2].E_coord,
+                              pentagon_books[j2].A_coord)
         if (flag == 25):
             print(f"Фигура под № {number_shape2} включается в фигуру под № {number_shape1} ")
         else:
@@ -444,28 +444,28 @@ def include_one_in_other(count_pent, count_rect, count_shapes):
     shape1 = ''
     shape2 = ''
     if count_shapes > 1:
-        number_shape1, flag = vvod_necessery_shape("1-Выбрать № фигуры\n2-выйти.\n", count_shapes,
+        number_shape1, flag = input_necessery_shape("1-Выбрать № фигуры\n2-выйти.\n", count_shapes,
                                                    "Выберите № фигуры с которой будем сравнивать.\n")
         flags += flag
-        number_shape2, flag = vvod_necessery_shape("1-Выбрать № фигуры\n2-выйти.\n", count_shapes,
+        number_shape2, flag = input_necessery_shape("1-Выбрать № фигуры\n2-выйти.\n", count_shapes,
                                                    "Выберите № фигуры которая должна быть внутри.\n")
         flags += flag
         if (flags == 2):
             for i in range(count_rect):
-                if shape_mass[number_shape1 - 1] == rectangle_mass[i]:
+                if shape_books[number_shape1 - 1] == rectangle_books[i]:
                     j1 = i
                     shape1 = 'rect'
 
-                if shape_mass[number_shape2 - 1] == rectangle_mass[i]:
+                if shape_books[number_shape2 - 1] == rectangle_books[i]:
                     j2 = i
                     shape2 = 'rect'
 
             for i in range(count_pent):
-                if shape_mass[number_shape1 - 1] == pentagon_mass[i]:
+                if shape_books[number_shape1 - 1] == pentagon_books[i]:
                     j1 = i
                     shape1 = 'pent'
 
-                if shape_mass[number_shape2 - 1] == pentagon_mass[i]:
+                if shape_books[number_shape2 - 1] == pentagon_books[i]:
                     j2 = i
                     shape2 = 'pent'
             if (shape1 == 'rect') and (shape2 == 'rect'):
@@ -497,7 +497,7 @@ def menu():
         print("5-Просмотреть ваши фигуры.")
         print("6-проверить на включение одной фигуры в другую.")
         print("7-Выйти.")
-        num = vvod_menu()
+        num = input_menu()
         if (num == 1):
             count_rect += 1
             count_shape += 1
@@ -511,7 +511,7 @@ def menu():
         elif (num == 4):
             move_pent(count_pent)
         elif (num == 5):
-            pentagon_mass[0].print_koord(count_pent)
+            pentagon_books[0].print_koord(count_pent)
             watch_shapes(count_shape, count_rect)
         elif (num == 6):
             include_one_in_other(count_pent, count_rect, count_shape)
