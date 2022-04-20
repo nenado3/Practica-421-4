@@ -1,0 +1,144 @@
+class Note:
+    def __init__(self, name, surname, birthday_day, number_phone):
+        self.name = name
+        self.surname = surname
+        self.birthday_day = birthday_day[0] + "." + birthday_day[1] + "." + birthday_day[2]
+        self.number_phone = number_phone
+
+    def __str__(self):
+        return str(
+            f"Имя-{self.name}\nФамилия - {self.surname}\nГод рождения - {self.birthday_day}\nТел. - {self.number_phone}")
+
+    def add_note(self):
+        self.name = input_text("Введите имя - ")
+        self.surname = input_text("Введите фамилию - ")
+        self.birthday_day = input_age()
+        self.number_phone = input_nuber_phone()
+
+
+notes = []
+
+
+def input_text(text):
+    while True:
+        num = input(text)
+        if num.isalpha():
+            return num
+        else:
+            print("Введены цифры.")
+
+
+def input_age():
+    s0 = "0"
+    list_month_30 = ('4', '6', '9', '11')
+    list_month_31 = ('1', '3', '5', '7', '8', '10', '12')
+    list_month_28 = ('2')
+    while True:
+        print("Год рождения - DD.MM.YYYY")
+        while True:
+            num_date = input("Дата-")
+            if num_date.isdigit():
+
+                break
+            else:
+                print("Введено не число.")
+        while True:
+            num_month = input("Месяц-")
+            if num_month.isdigit():
+                break
+            else:
+                print("Введено не число.")
+        while True:
+            num_year = input("Год-")
+            if num_year.isdigit():
+                if (1900 < int(num_year) < 2023):
+                    break
+                else:
+                    print("Недопустимый год.")
+            else:
+                print("Введено не число.")
+
+        if (((num_month in list_month_30) and (1 <= int(num_date) <= 30)) or (
+                (num_month in list_month_31) and (1 <= int(num_date) <= 31))
+                or ((num_month in list_month_28) and (1 <= int(num_date) <= 28))):
+            if (int(num_month) < 10): num_month = s0 + num_month
+            if (int(num_date) < 10): num_date = s0 + num_date
+            return num_date + "." + num_month + "." + num_year
+        else:
+            print("Данной даты не существует.")
+
+
+def input_nuber_phone():
+    while True:
+        numb = input("Тел. - ")
+        if numb.isdigit():
+            return (numb)
+
+        else:
+            print("Введёно неккоректно.")
+
+
+def sort_by_phone(n):
+    list = [i for i in range(n)]
+    for i in range(n):
+        list[i] = notes[i].number_phone
+
+    list = sorted(list)
+    for i in range(n):
+        for j in range(n):
+            if (notes[j].number_phone == list[i]):
+                notes[i].name, notes[j].name = notes[j].name, notes[i].name
+                notes[i].surname, notes[j].surname = notes[j].surname, notes[i].surname
+                notes[i].number_phone, notes[j].number_phone = notes[j].number_phone, notes[i].number_phone
+                notes[i].birthday_day, notes[j].birthday_day = notes[j].birthday_day, notes[i].birthday_day
+    print("Записная книжка отсортирована")
+
+
+def make_notes(n):
+    while n != 8:
+        n += 1
+        notes.append(Note("0","0", ["0", "0", "0"], "0"))
+        notes[n - 1].add_note()
+        print("Запись добавлена.")
+    sort_by_phone(n)
+
+
+def input_menu():
+    my_list = (1, 2)
+    while True:
+        num = input(f"Введите указанное число\n")
+        if num.isdigit():
+            num = int(num)
+            if num in my_list:
+                return num
+            else:
+                print("Введите Нужное число")
+        else:
+            print("Вы должны ввести указанное число, попробуйте снова.")
+
+
+def search_by_surname(n):
+    input_surname = input("Введите нужную вам фамилию.")
+    for i in range(n):
+        if (input_surname == notes[i].surname): print(f"Ваша запись:\n{notes[i]}", end="\n\n")
+        else: print("Такой фамилии не найдено.",end="\n\n")
+
+def menu():
+    n = 0
+    print("Создайте ,пожалуйста, 8 записей.")
+    make_notes(n)
+    n = 8
+    while True:
+        for i in range(n):
+            print(notes[i])
+        print("1-найти запись по фамилии.")
+        print("2-выход")
+        inputs = input_menu()
+        if (inputs == 1):
+            search_by_surname(n)
+        else:
+            break
+
+
+if __name__ == '__main__':
+    menu()
