@@ -1,0 +1,54 @@
+class MySet:
+    def __init__(self, list):
+        self.list = list
+
+    def __str__(self):
+        return str(self.list)
+
+    def remove(self):
+
+        for i in self.list:
+
+            if self.list.count(i) > 1:
+                self.list.remove(i)
+        self.list.sort()
+
+    def add(self, i):
+        if i not in self.list:
+            self.list.append(i)
+        else: print("Такое значение уже есть.")
+
+
+def input_menu():
+    my_list = (1, 2, 3)
+    while True:
+        num = input(f"Введите указанное число\n")
+        if num.isdigit():
+            num = int(num)
+            if num in my_list:
+                return num
+                break
+            else:
+                print("Введите Нужное число")
+        else:
+            print("Вы должны ввести указанное число, попробуйте снова.")
+
+
+massiv = [MySet([1, 2, 3, 5, 7, 2, 1, 5, 3, 2, 9])]
+
+if __name__ == '__main__':
+    while True:
+        print("Меню Set maker-а")
+        print(f"Ваш массив {massiv[0]}")
+        print("1-добавить неповторяющийся элемент.")
+        print("2-удалить повторяющиеся и отсортировать.")
+        print("3-Выход.")
+        inputs = input_menu()
+        if inputs == 1:
+            i = int(input("Введите число "))
+            massiv[0].add(i)
+
+        elif inputs == 2:
+            massiv[0].remove()
+        else:
+            break
